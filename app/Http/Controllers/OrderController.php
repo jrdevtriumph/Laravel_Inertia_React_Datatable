@@ -11,13 +11,26 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $order_list = Order::query()->get();
-        
+        $perPage       = $request->input('per_page', 10);
+        $page          = $request->input('page', 1);
+
+        $query = Order::query();
+
+        $orders = $query->paginate($perPage, ['*'], 'page', $page);
+        $pagination = [
+            'current_page' => $orders->currentPage(),
+            'last_page'    => $orders->lastPage(),
+            'per_page'     => $orders->perPage(),
+            'total'        => $orders->total(),
+        ];
+        $order_list = $orders->items();
+
         return Inertia::render('Order/index', [
-            'order_list' => $order_list
-        ]);
+            'order_list' => $order_list,
+            'pagination' => $pagination,
+        ]);        
     }
 
     /**

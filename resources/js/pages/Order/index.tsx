@@ -1,8 +1,10 @@
 import LinkButton from '@/components/LinkButton';
-import { Card, CardContent } from '@/components/ui/card';
+import Pagination from '@/components/Pagination';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 
 // Defin Order Type
@@ -36,10 +38,20 @@ type Order = {
     payment_status:   string;
 }
 
+// Define Pagination Type
+type Pagination = {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+};
+
 // Define Props Type 
 type PageProps = {
     order_list: Order[];
+    pagination: Pagination;
 }
+
 
 // Bredcrumb 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -50,7 +62,31 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Index() {
     // Getting Props Through Use Page - Passing PageProps Type
     const { props } = usePage<PageProps>();
-    const { order_list } = props;
+    const { order_list, pagination } = props;
+    
+
+        
+    // Fetch Orders with given filters via Inertia
+    const fetchOrders = (params: Partial<{ page: number }>) => {
+        const query = {
+            page: params.page ?? currentPage,
+        };
+
+        router.get('/order', query, {
+            preserveState: true,
+            replace: true,
+        });
+    };
+
+
+    // Pagination 
+    const [currentPage, setCurrentPage] = useState(pagination.current_page || 1);    
+
+    // Handle pagination click
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        fetchOrders({ page });
+    };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -98,6 +134,16 @@ export default function Index() {
                         </div>
                         {/* End Responsive Table */}
                     </CardContent>
+                    <CardFooter>
+                        <div className="space-y-2">
+                            <p className="text-muted-foreground">You have {order_list.length} intractions.</p>
+                            <Pagination
+                                currentPage={pagination.current_page}
+                                totalPages={pagination.last_page}
+                                onPageChange={handlePageChange}
+                            />
+                        </div>
+                    </CardFooter>
                 </Card>
                 {/* End Card */}     
             </div>
