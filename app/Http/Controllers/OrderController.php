@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OrderController extends Controller
 {
@@ -11,7 +13,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $order_list = Order::query()->get();
+        
+        return Inertia::render('Order/index', [
+            'order_list' => $order_list
+        ]);
     }
 
     /**
@@ -19,7 +25,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Order/create');
     }
 
     /**

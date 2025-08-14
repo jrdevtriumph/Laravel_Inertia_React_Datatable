@@ -9,7 +9,6 @@ class OrderSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create 50 dummy orders
         Order::factory()->count(50)->create();
     }
 }

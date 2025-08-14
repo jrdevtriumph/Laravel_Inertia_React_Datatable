@@ -5,6 +5,46 @@ namespace App\Models {
     /**
      * App\Models\Order
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property string $payment_status
+     * @property string|null $payment_method
+     * @property float $total
+     * @property float $tax
+     * @property float $subtotal
+     * @property string $status
+     * @property float $shipping_cost
+     * @property string|null $shipping_method
+     * @property string|null $shipping_address
+     * @property string $allow_shipping
+     * @property array|null $order_items
+     * @property string|null $ordering_officer
+     * @property string|null $ordering_office
+     * @property string|null $attachment
+     * @property \Illuminate\Support\Carbon|null $order_date
+     * @property array|null $customer_details
+     * @property int $order_number
+     * @property int $id
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereOrderNumber($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereCustomerDetails($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereOrderDate($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereAttachment($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereOrderingOffice($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereOrderingOfficer($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereOrderItems($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereAllowShipping($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereShippingAddress($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereShippingMethod($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereShippingCost($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereStatus($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereSubtotal($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereTax($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereTotal($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order wherePaymentMethod($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order wherePaymentStatus($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Order>|Order query()
